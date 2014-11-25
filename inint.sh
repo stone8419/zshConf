@@ -40,4 +40,4 @@ fi
 cp .dir_colors ${HOMEDIR}/
 cp .bash_profile ${HOMEDIR}/
 cp .zshrc ${HOMEDIR}/
-cp paladin.zsh-theme ${HOMEDIR}/.oh-my-zsh/themes
+cp paladin.zsh-theme ${HOMEDIR}/.oh-my-zsh/themes/
