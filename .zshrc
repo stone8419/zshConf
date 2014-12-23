@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=${HOME}/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -47,11 +47,11 @@ ZSH_THEME="paladin"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git brew)
 
-source $ZSH/oh-my-zsh.sh
+source ${ZSH}/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:${HOME}/bin:/usr/local/bin:${PATH}"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:${HOME}/bin:${PATH}"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -81,7 +81,12 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sb
 
 # bash_profile
 if brew list | grep coreutils > /dev/null ; then
-  PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+#  PATH="$(brew --prefix coreutils)/libexec/gnubin:${PATH}"
   alias ls='ls -F --show-control-chars --color=auto'
   eval `gdircolors -b $HOME/.dir_colors`
 fi
+
+#GO Config
+export GOROOT=/usr/local/go
+#export PATH=${PATH}:${GOROOT}/bin
+export GOPATH=~/workplace/godevelop
