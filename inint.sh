@@ -16,7 +16,7 @@ fi
 echo -e "\033[0;34mLooking for an existing zsh config...\033[0m"
 if [ -f ${HOMEDIR}/.zshrc ]; then
   echo -e "\033[0;33mFound ${HOMEDIR}/.zshrc.\033[0m \033[0;32mBacking up to ${HOMEDIR}/.zshrc.pre-oh-my-zsh\033[0m";
-  mv ${HOMEDIR}/.zshrc ${HOMEDIR}/.zshrc.pre-oh-my-zshd
+  mv ${HOMEDIR}/.zshrc ${HOMEDIR}/.zshrc.pre-oh-my-zsh
 fi
 
 echo -e "\033[0;34mLooking for an existing bash config...\033[0m"

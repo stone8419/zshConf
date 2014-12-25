@@ -91,3 +91,8 @@ export GOROOT=/usr/local/go
 export GOBIN=$GOROOT/bin
 #export PATH=${PATH}:${GOROOT}/bin
 export GOPATH=~/workplace/godevelop:~/workplace/goer
+
+#bash_completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  $(brew --prefix)/etc/bash_completion
+fi
