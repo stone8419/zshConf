@@ -93,9 +93,11 @@ export GOBIN=$GOROOT/bin
 export GOPATH=~/workplace/godevelop:~/workplace/goer
 
 #MySql
-alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM restart'
-alias mysql='/usr/local/mysql/bin/mysql'
-alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
+#alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM restart'
+#alias mysql='/usr/local/mysql/bin/mysql'
+#alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
+#alias mysql='/Applications/AMPPS/mysql/bin/mysql'
+#alias mysqladmin='/Applications/AMPPS/mysql/bin/mysqladmin'
 
 #bash_completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
