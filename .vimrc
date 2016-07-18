@@ -39,6 +39,7 @@ set cmdheight=2  "命令行的高度,默认是1
 set laststatus=1  "总是显示状态行
 "set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\  "设置在状态行显示的信息
 
+syntax enable
 set foldenable  "开启折叠
 set foldmethod=syntax  "设置语法折叠
 set foldlevel=99  "默认情况下不折叠
@@ -54,6 +55,14 @@ set modelines=0		"vim会在一个文件的前modelines行和后modelines行中�
 set gdefault  "行内替换
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,euc-jp,latin1  "编码设置
+
+set guifont=Menlo:h14:cANSI  "设置字体
+set langmenu=zn_CN.UTF-8
+set helplang=cn  "语言设置
+set scrolloff=1  "光标移动到buffer的顶部和底部时保持1行的距离
+set autowrite  "在切换buffer时自动保存当前文件
+set wildmenu  "增强模式中的命令行自动完成操作
+set linespace=2  "字符间插入的像素行数目
 
 "return OS type, eg: windows, or linux, mac, et.st..
 "function! MySys()
@@ -125,6 +134,8 @@ filetype on  "打开文件类型检测功能
 "-----------------------------------------------------------------
 let NERDSpaceDelims=1  "让注释符与语句之间留一个空格
 let NERDCompactSexyComs=1  "多行注释时样子更好看
+"let NERDTreeQuitOnOpen=1  "打开文件时关闭树
+"let NERDTreeShowBookmarks=1  "显示书签
 "let g:NERDDefaultAlign = 'left'  "Align line-wise comment delimiters flush left instead of following code indentation
 "let g:NERDAltDelims_java = 1  "Set a language to use its alternate delimiters by default
 "let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }  "Add your own custom formats or override the defaults
@@ -144,7 +155,6 @@ let Tlist_File_Fold_Auto_Close = 1  "自动折叠当前非编辑文件的方法�
 "let Tlist_Display_Prototype = 0
 "let Tlist_Compact_Format = 1
 
-
 "关闭/打开配对括号高亮
 "NoMatchParen
 "DoMatchParen
@@ -153,27 +163,16 @@ let Tlist_File_Fold_Auto_Close = 1  "自动折叠当前非编辑文件的方法�
 autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul
 
-set guifont=Menlo:h14:cANSI  "设置字体
-set langmenu=zn_CN.UTF-8
-set helplang=cn  "语言设置
-
-set scrolloff=3  "光标移动到buffer的顶部和底部时保持3行的距离
-
-set autowrite  "在切换buffer时自动保存当前文件
-
-set wildmenu  "增强模式中的命令行自动完成操作
-
-set linespace=2  "字符间插入的像素行数目
 "开启normal 或visual模式下的backspace键空格键，左右方向键,insert或replace模式下的左方向键，右方向键的跳行功能
 set whichwrap=b,s,<,>,[,]
 
 "minibufexpl最小化文件标头
 let g:miniBufExplMapWindowNavVim=1  "按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
 let g:miniBufExplMapWindowNavArrows=1  "按下Ctrl+箭头，可以切换到当前窗口的上下左右窗口
-let g:miniBufExplMapCTabSwitchBufs=1  "启用以下两个功能:Ctrl+tab移到下一个buffer并在当前窗口打开;Ctrl+Shift+tab移到上一个buffer并在当前窗口打开;ubuntu好像不支持
-let g:miniBufExplModSelTarget=1  "不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
-
-syntax enable
+"启用以下两个功能:Ctrl+tab移到下一个buffer并在当前窗口打开;Ctrl+Shift+tab移到上一个buffer并在当前窗口打开;ubuntu好像不支持
+let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufExplMapCTabSwitchWindows=1  "启用以下两个功能:Ctrl+tab移到下一个窗口;Ctrl+Shift+tab移到上一个窗口;ubuntu好像不支持
+let g:miniBufExplModSelTarget=1  "不要在不可编辑内容的窗口(如TagList窗口)中打开选中的buffer
 
 set omnifunc=syntaxcomplete#Complete
 highlight Pmenu ctermfg=13 ctermbg=0 guifg=#ffffff guibg=#0000ff
@@ -183,8 +182,6 @@ set shortmess+=I
 "insert mode: ctrl+u  turn  the current word to uppercase
 inoremap <c-u> <esc>bveUi
 
-"let NERDTreeQuitOnOpen=1  "打开文件时关闭树
-"let NERDTreeShowBookmarks=1  "显示书签
 
 let mapleader = ","
 map <leader>ne :NERDTreeToggle<CR>
@@ -208,21 +205,37 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
 set completeopt=longest,menu
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif  "离开插入模式后自动关闭预览窗口
-"回车即选中当前项
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"  "回车即选中当前项
 "上下左右键的行为
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>  "跳转到定义处
-nnoremap <F6> :YcmForceCompileAndDiagnostics<CR>	 "force recomile with syntastic
-"nnoremap <leader>lo :lopen<CR>	 "open locationlist
-"nnoremap <leader>lc :lclose<CR>	 "close locationlist
-inoremap <leader><leader> <C-x><C-o>
 let g:ycm_complete_in_comments=1  "在注释输入中也能补全
 let g:ycm_complete_in_strings=1  "在字符串输入中也能补全
 let g:ycm_collect_identifiers_from_comments_and_strings=0  "注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_tags_files=1  "开启YCM基于标签引擎,可以在这之后添加需要的标签路径
+let g:ycm_min_num_of_chars_for_completion=2  "从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0  "禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1  "语法关键字补全
+"Youcompleteme 默认tab s-tab和自动补全冲突
+"let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_global_ycm_extra_conf = '~/.vim/data/ycm/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0  "关闭加载.ycm_extra_conf.py提示
+" 设置在下面几种格式的文件上屏蔽ycm
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'nerdtree' : 1,
+      \}
+"let g:ycm_key_invoke_completion = '<M-;>'  "修改对C函数的补全快捷键，默认是CTRL+space,修改为ALT+;
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>  "force recomile with syntastic
+"nnoremap <leader>lo :lopen<CR>  "open locationlist
+"nnoremap <leader>lc :lclose<CR>  "close locationlist
+inoremap <leader><leader> <C-x><C-o>
 
 
 "对搜索的设置
