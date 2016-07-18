@@ -59,7 +59,7 @@ set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936,utf-16,big5,e
 set guifont=Menlo:h14:cANSI  "设置字体
 set langmenu=zn_CN.UTF-8
 set helplang=cn  "语言设置
-set scrolloff=1  "光标移动到buffer的顶部和底部时保持1行的距离
+set scrolloff=0  "光标移动到buffer的顶部和底部时保持0行的距离
 set autowrite  "在切换buffer时自动保存当前文件
 set wildmenu  "增强模式中的命令行自动完成操作
 set linespace=2  "字符间插入的像素行数目
@@ -120,7 +120,7 @@ call vundle#end()
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 "分为三部分命令:file on,file plugin on,file indent on 分别是自动识别文件类型,用文件类型脚本,使用缩进定义文件
-filetype plugin on  "开启插件
+"filetype plugin on  "开启插件
 filetype plugin indent on  "依文件类型设置自动缩进
 filetype on  "打开文件类型检测功能
 
@@ -203,7 +203,7 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 
 "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-set completeopt=longest,menu
+set completeopt+=longest,menu
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif  "离开插入模式后自动关闭预览窗口
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"  "回车即选中当前项
 "上下左右键的行为
@@ -224,7 +224,7 @@ let g:ycm_seed_identifiers_with_syntax=1  "语法关键字补全
 let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:ycm_global_ycm_extra_conf = '~/.vim/data/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/data/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf=0  "关闭加载.ycm_extra_conf.py提示
 " 设置在下面几种格式的文件上屏蔽ycm
 let g:ycm_filetype_blacklist = {
