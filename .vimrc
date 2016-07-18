@@ -46,11 +46,12 @@ set foldlevel=99  "默认情况下不折叠
 "set foldcolumn=0  "设置折叠区域的宽度
 "setlocal foldlevel=1  "设置折叠层数为1
 "set foldclose=all  "设置为自动关闭折叠
-nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>  "用空格键来开关折叠
+"用空格键来开关折叠
+nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
 set confirm  "在处理未保存或只读文件的时候,弹出确认框
 set history=60  "历史纪录数
-set modelines=0		"vim会在一个文件的前modelines行和后modelines行中寻找modeline命令
+set modelines=0  "vim会在一个文件的前modelines行和后modelines行中寻找modeline命令
 
 set gdefault  "行内替换
 set encoding=utf-8
@@ -96,7 +97,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'taglist.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'Valloric/YouCompleteMe'  "C的主要Vim配置
-Plugin 'Syntastic'
+"Plugin 'scrooloose/syntastic'
 "Plugin 'shawncplus/phpcomplete.vim'
 "Plugin 'beanworks/vim-phpfmt'
 "Plugin 'alvan/vim-php-manual'
