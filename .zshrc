@@ -45,13 +45,13 @@ ZSH_THEME="paladin"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew)
+plugins=(git brew npm)
 
 source ${ZSH}/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:${HOME}/bin:${PATH}"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:${HOME}/bin:/opt/local/bin:/opt/local/sbin:${PATH}"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -88,22 +88,49 @@ fi
 
 # GO Config
 export GOROOT=/usr/local/go
+#export GOROOT=/usr/local/opt/go/libexec
 export GOBIN=$GOROOT/bin
-#export PATH=${PATH}:${GOROOT}/bin
-export GOPATH=~/workplace/godevelop:~/workplace/goer
+export PATH=${PATH}:${GOROOT}/bin
+export GOPATH=~/workplace/godev
+#export GOPATH=$GOPATH:~/Paxos
 
 # MySql Config
 #alias mysqlstart='sudo /Library/StartupItems/MySQLCOM/MySQLCOM restart'
 #alias mysql='/usr/local/mysql/bin/mysql'
+alias mysql='/Applications/AMPPS/mysql/bin/mysql'
+alias mysqladmin='/Applications/AMPPS/mysql/bin/mysqladmin'
 #alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
-#alias mysql='/Applications/AMPPS/mysql/bin/mysql'
-#alias mysqladmin='/Applications/AMPPS/mysql/bin/mysqladmin'
 
 # Zookeeper Config
-#export ZOOKEEPER_HOME=/Users/paladintyrion/zookeeper/zookeeper-3.4.6
+export ZOOKEEPER_HOME=/Users/paladintyrion/zookeeper/zookeeper-3.4.6
 #export PATH=$ZOOKEEPER_HOME/bin:$PATH
+
+#HADOOP Config
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+export HADOOP_HOME=/Users/paladintyrion/src/lib/hadoop-2.7.2
+export PATH=${PATH}:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin
+export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
+
+#GCC/G++
+#alias g++='/usr/local/opt/gcc/bin/g++-6'
+#alias gcc='/usr/local/opt/gcc/bin/gcc-6'
 
 # Bash Completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   $(brew --prefix)/etc/bash_completion
 fi
+
+# for tikv env
+rocksdb_dir=$HOME/.cache/rocksdb
+#if [[ "$need_rebuild" == "true" ]] && [[ ! -d "$rocksdb_dir" ]]; then 
+#  mkdir -p $rocksdb_dir;
+#fi
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$rocksdb_dir"
+export LIBRARY_PATH="$LD_LIBRARY_PATH"
+
+# wine start sourcesight
+alias sight='wine "C:\sourcesight\Insight3.exe"'
+
+VIM=~/.vim
