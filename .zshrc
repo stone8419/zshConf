@@ -45,7 +45,7 @@ ZSH_THEME="paladin"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew npm)
+plugins=(git brew npm mvn docker docker-machine)
 
 source ${ZSH}/oh-my-zsh.sh
 
@@ -106,12 +106,33 @@ export ZOOKEEPER_HOME=/Users/paladintyrion/zookeeper/zookeeper-3.4.6
 #export PATH=$ZOOKEEPER_HOME/bin:$PATH
 
 #HADOOP Config
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_102.jdk/Contents/Home
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
-export HADOOP_HOME=/Users/paladintyrion/src/lib/hadoop-2.7.2
+
+export HADOOP_HOME=/Users/paladintyrion/src/src/hadoop-2.6.4
 export PATH=${PATH}:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin
 export HADOOP_CONF_DIR=${HADOOP_HOME}/etc/hadoop
+export YARN_CONF_DIR=${HADOOP_CONF_DIR}
+#export HADOOP_ROOT_LOGGER=INFO,console
+export HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_HOME}/lib/native
+export HADOOP_OPTS="-Djava.library.path=${HADOOP_HOME}/lib/native"
+export LD_LIBRARY_PATH=${HADOOP_HOME}/lib/native:$LD_LIBRARY_PATH
+#HIVE Config
+export HIVE_HOME=/Users/paladintyrion/src/src/apache-hive-2.1.0-bin
+export PATH=${PATH}:${HIVE_HOME}/bin
+
+#Scala Config
+export SCALA_HOME=/Users/paladintyrion/src/src/scala/scala-2.10.6
+export PATH=$PATH:$SCALA_HOME/bin
+export SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
+export SBT_HOME=/Users/paladintyrion/src/src/scala/sbt
+export PATH=$PATH:$SBT_HOME/bin
+
+#Spark Config
+export SPARK_HOME=/Users/paladintyrion/src/src/Spark/spark-2.0.1-bin-hadoop2.7
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+export MAVEN_OPTS="-Xmx3g -XX:MaxPermSize=1g -XX:ReservedCodeCacheSize=1g"
 
 #GCC/G++
 #alias g++='/usr/local/opt/gcc/bin/g++-6'
@@ -130,7 +151,14 @@ rocksdb_dir=$HOME/.cache/rocksdb
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$rocksdb_dir"
 export LIBRARY_PATH="$LD_LIBRARY_PATH"
 
+#etcd Config
+export ETCDCTL_API=3
+
 # wine start sourcesight
 alias sight='wine "C:\sourcesight\Insight3.exe"'
+
+#go path
+alias cdgo='cd $GOPATH/src'
+alias cdwp='cd ~/workplace'
 
 VIM=~/.vim

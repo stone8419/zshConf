@@ -5,6 +5,7 @@ colorscheme molokai  "default配色方案
 set background=dark  "背景黑色
 set t_Co=256  "256色
 set number  "显示行号
+set relativenumber  "行号为相对行号
 set cursorline  "突出显示当前行
 set ruler  "右下角状态行光标
 
@@ -31,7 +32,7 @@ set magic  "设置魔术?
 set showcmd  "在状态栏显示正在输入的命令,未完成的指令片段也会显示出来
 set smartindent  "智能对齐
 set autoindent  "自动对齐
-set mouse=a  "允许鼠标
+"set mouse=a  "允许鼠标
 
 set backspace=2  "more powerful backspacing?
 
@@ -96,7 +97,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'taglist.vim'
 Plugin 'majutsushi/tagbar'
-Plugin 'Valloric/YouCompleteMe'  "C的主要Vim配置
+"Plugin 'Valloric/YouCompleteMe'  "C的主要Vim配置
 "Plugin 'scrooloose/syntastic'
 "Plugin 'shawncplus/phpcomplete.vim'
 "Plugin 'beanworks/vim-phpfmt'
@@ -108,6 +109,8 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdcommenter'  "自动添加注释
 Plugin 'minibufexpl.vim'  "最小化
+Plugin 'derekwyatt/vim-scala'  "scala插件
+Plugin 'rust-lang/rust.vim'  "rust插件
 
 "Optional
 Plugin 'honza/vim-snippets'
@@ -143,7 +146,8 @@ let NERDCompactSexyComs=1  "多行注释时样子更好看
 
 
 "Taglist插件设置
-let Tlist_Ctags_Cmd = '/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+""let Tlist_Ctags_Cmd = '/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
 let Tlist_Use_Right_Window = 1  "taglist显示在右侧
 let Tlist_Exit_OnlyWindow = 1  "taglist只剩一个窗口时自动关闭
 let Tlist_File_Fold_Auto_Close = 1  "自动折叠当前非编辑文件的方法列表
@@ -163,6 +167,12 @@ let Tlist_File_Fold_Auto_Close = 1  "自动折叠当前非编辑文件的方法�
 "用浅色高亮当前行
 autocmd InsertLeave * se nocul
 autocmd InsertEnter * se cul
+
+"自动行号
+":au FocusLost * :set number
+":au FocusGained * :set relativenumber
+"autocmd InsertEnter * :set number
+"autocmd InsertLeave * :set relativenumber
 
 "开启normal 或visual模式下的backspace键空格键，左右方向键,insert或replace模式下的左方向键，右方向键的跳行功能
 set whichwrap=b,s,<,>,[,]
@@ -204,39 +214,39 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 
 "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-set completeopt+=longest,menu
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif  "离开插入模式后自动关闭预览窗口
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"  "回车即选中当前项
+""set completeopt+=longest,menu
+""autocmd InsertLeave * if pumvisible() == 0|pclose|endif  "离开插入模式后自动关闭预览窗口
+""inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"  "回车即选中当前项
 "上下左右键的行为
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>  "跳转到定义处
-let g:ycm_complete_in_comments=1  "在注释输入中也能补全
-let g:ycm_complete_in_strings=1  "在字符串输入中也能补全
-let g:ycm_collect_identifiers_from_comments_and_strings=0  "注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_tags_files=1  "开启YCM基于标签引擎,可以在这之后添加需要的标签路径
-let g:ycm_min_num_of_chars_for_completion=2  "从第2个键入字符就开始罗列匹配项
-let g:ycm_cache_omnifunc=0  "禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1  "语法关键字补全
+""inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+""inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+""inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+""inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+""nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>  "跳转到定义处
+""let g:ycm_complete_in_comments=1  "在注释输入中也能补全
+""let g:ycm_complete_in_strings=1  "在字符串输入中也能补全
+""let g:ycm_collect_identifiers_from_comments_and_strings=0  "注释和字符串中的文字也会被收入补全
+""let g:ycm_collect_identifiers_from_tags_files=1  "开启YCM基于标签引擎,可以在这之后添加需要的标签路径
+""let g:ycm_min_num_of_chars_for_completion=2  "从第2个键入字符就开始罗列匹配项
+""let g:ycm_cache_omnifunc=0  "禁止缓存匹配项,每次都重新生成匹配项
+""let g:ycm_seed_identifiers_with_syntax=1  "语法关键字补全
 "Youcompleteme 默认tab s-tab和自动补全冲突
 "let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
+""let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_global_ycm_extra_conf = '~/.vim/data/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf=0  "关闭加载.ycm_extra_conf.py提示
+""let g:ycm_key_list_previous_completion = ['<Up>']
+""let g:ycm_global_ycm_extra_conf = '~/.vim/data/.ycm_extra_conf.py'
+""let g:ycm_confirm_extra_conf=0  "关闭加载.ycm_extra_conf.py提示
 " 设置在下面几种格式的文件上屏蔽ycm
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'nerdtree' : 1,
-      \}
+""let g:ycm_filetype_blacklist = {
+""      \ 'tagbar' : 1,
+""      \ 'nerdtree' : 1,
+""      \}
 "let g:ycm_key_invoke_completion = '<M-;>'  "修改对C函数的补全快捷键，默认是CTRL+space,修改为ALT+;
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>  "force recomile with syntastic
+""nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>  "force recomile with syntastic
 "nnoremap <leader>lo :lopen<CR>  "open locationlist
 "nnoremap <leader>lc :lclose<CR>  "close locationlist
-inoremap <leader><leader> <C-x><C-o>
+""inoremap <leader><leader> <C-x><C-o>
 
 
 "对搜索的设置
